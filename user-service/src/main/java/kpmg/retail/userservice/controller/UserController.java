@@ -7,6 +7,10 @@ import kpmg.retail.userservice.model.User;
 import kpmg.retail.userservice.repository.FeedbackRepository;
 import kpmg.retail.userservice.repository.UserRepository;
 import kpmg.retail.userservice.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@Slf4j
 public class UserController
 {
     @Autowired
@@ -23,6 +28,8 @@ public class UserController
     private UserRepository userRepository;
     @Autowired
     private FeedbackRepository feedbackRepository;
+    Logger logger = LoggerFactory.getLogger(UserController.class);
+
 
     // ------------------------------Endpoints for app------------------------------
 
@@ -49,7 +56,19 @@ public class UserController
     @PostMapping("/updateLp")
     public void updateLp(@RequestBody LoyaltyPointsUpdateRequest lpUpdate) {
         Optional<User> user = userRepository.findById(lpUpdate.getUserId());
-        user.get().setLoyaltyPoints(user.get().getLoyaltyPoints() + lpUpdate.getNewVal());
+        Integer pointsEarned = lpUpdate.getPointsEarned();
+        Boolean hasRedeemed = lpUpdate.getHasRedeemed();
+
+        // transient variable to store the previous points balance
+        int prevPoints = user.get().getLoyaltyPoints();
+
+        if (hasRedeemed) {
+            user.get().setLoyaltyPoints(pointsEarned);
+        } else {
+            user.get().setLoyaltyPoints(user.get().getLoyaltyPoints() + pointsEarned);
+        }
+
+        logger.info("Updated loyalty points from " + prevPoints + " to " + user.get().getLoyaltyPoints());
         userRepository.save(user.get());
     }
 

@@ -7,29 +7,28 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "order_items")
+@Table(name = "ORDER_ITEMS")
 public class OrderItem {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idSuffix;
     @Id
-    @Column(name = "order_item_id")
-    private String orderItemId = "oi" + idSuffix.toString();
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ORDER_ITEM_ID")
+    private Long oiId;
 
-    @Column(name = "transaction_id")
+    @Column(name = "TRANSACTION_ID")
     private String transactionId;
 
-    @Column(name = "product_id")
-    private Long productId;
+    @Column(name = "PRODUCT_ID")
+    private String productId;
 
-    @Column(name = "product_fullName")
+    @Column(name = "PRODUCT_FULL_NAME")
     private String productFullName;
 
-    @Column(name = "quantity")
+    @Column(name = "QUANTITY")
     private Integer quantity;
 
-    @Column(name = "mrp")
+    @Column(name = "MRP")
     private Double mrp;
 
-    @Column(name = "price")
+    @Column(name = "PRICE")
     private Double price;
 }

@@ -10,11 +10,10 @@ import java.time.LocalDateTime;
 @Data
 @Table(name = "feedbacks")
 public class FeedbackRequest {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idSuffix;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "feedback_id")
-    private String serialNumber = "fb" + idSuffix;
+    private Long feedbackId;
 
     @Column(name = "timestamp")
     private Timestamp createdAt = Timestamp.valueOf(LocalDateTime.now());

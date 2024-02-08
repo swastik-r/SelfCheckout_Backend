@@ -1,12 +1,14 @@
 package kpmg.retail.productservice.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
-import jakarta.persistence.*;
+import kpmg.retail.productservice.repository.ProductRepository;
+import lombok.Builder;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.*;
 
-import java.util.List;
+import javax.naming.InterruptedNamingException;
+import java.util.Random;
 
 @Entity
 @Data
@@ -14,26 +16,29 @@ import java.util.List;
 public class Product {
     @Id
     @Column(name = "PRODUCT_SERIAL")
-    private Long productId;
+    private String product_serial;
+
+    @Column(name = "SKU_ID")
+    private String sku_id;
 
     @Column(name = "PRODUCT_BRAND")
-    private String brandName;
+    private String product_brand;
 
     @Column(name = "PRODUCT_NAME")
-    private String productName;
+    private String product_name;
 
     @Column(name = "PRODUCT_IMAGE")
-    private String productImage;
-
-    @Column(name = "PRODUCT_PRICE")
-    private Double productPrice;
+    private String product_image;
 
     @Column(name = "PRODUCT_CATEGORY")
-    private String productCategory;
+    private String product_category;
+
+    @Column(name = "TAX_RATE")
+    private Double tax_rate;
 
     @Column(name = "MRP")
     private Double mrp;
 
     @Column(name = "SELLING_PRICE")
-    private Double sellingPrice;
+    private Double selling_price;
 }

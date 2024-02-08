@@ -9,19 +9,21 @@ import lombok.Data;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "user_name")
     private String name;
 
-    @Column(name = "encrypted_mobile")
+    @Column(name = "user_encrypted_mobile")
     private String encryptedMobile;
 
-    @Column(name = "loyalty_points")
+    @Column(name = "user_lpBalance")
     private Integer loyaltyPoints;
 
-    @Column(name = "feedback_avg")
+    @Column(name = "user_feedback")
     private Double feedbackAvg;
-}
 
+    @Column(name = "user_role")
+    private String role;
+}

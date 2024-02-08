@@ -5,6 +5,7 @@ import kpmg.retail.userservice.dto.RegisterRequest;
 import kpmg.retail.userservice.model.User;
 import kpmg.retail.userservice.repository.UserRepository;
 import kpmg.retail.userservice.security.EncryptionUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,15 +27,20 @@ public class UserService
         user.setEncryptedMobile(EncryptionUtils.encrypt(registerRequest.getMobileNumber()));
         user.setLoyaltyPoints(0);
         user.setFeedbackAvg(0.0);
+        user.setRole("CUSTOMER");
         return userRepository.save(user);
     }
 
     public void updateFeedbackAvg(FeedbackRequest feedbackRequest) {
         Optional<User> user = userRepository.findById(feedbackRequest.getUserId());
         Double oldFeedbackRating = user.get().getFeedbackAvg();
+
+        // Calculate the new feedback rating
         Double updatedFeedbackRating = (oldFeedbackRating + feedbackRequest.getRating()) / 2;
+
         // Add 10 loyalty points for every feedback
         user.get().setLoyaltyPoints(user.get().getLoyaltyPoints() + 10);
+
         user.get().setFeedbackAvg(updatedFeedbackRating);
         userRepository.save(user.get());
     }

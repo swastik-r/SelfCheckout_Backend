@@ -1,33 +1,30 @@
 package kpmg.retail.transactionservice.model;
 
 import jakarta.persistence.*;
+import kpmg.retail.transactionservice.repository.TransactionRepository;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
 
 @Entity
 @Data
 @Table(name = "transactions")
 public class Transaction {
-    // generate id automatically as a random UUID
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
-    private String id;
+    @Column(name = "transaction_id")
+    private String transactionId = "TRX" + new Random().nextInt(1000000);
 
     @Column(name = "created_at")
     private Timestamp createdAt = Timestamp.valueOf(LocalDateTime.now());
 
     @Column(name = "user_id")
-    private Long userId;
+    private String userId;
 
-    @Column(name = "user_mobile_num")
-    private String userMobileNum;
+    @Column(name = "encrypted_mobile")
+    private String encryptedMobile;
 
     @Column(name = "payment_id")
     private Long paymentId;
