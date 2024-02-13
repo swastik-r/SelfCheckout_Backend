@@ -16,7 +16,7 @@ public class Transaction {
     @Id
     @Column(name = "transaction_id")
     private String transactionId = "TRX" + new Random().nextInt(1000000);
-
+    
     @Column(name = "created_at")
     private Timestamp createdAt = Timestamp.valueOf(LocalDateTime.now());
 

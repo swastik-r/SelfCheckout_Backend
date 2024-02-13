@@ -19,7 +19,7 @@ public class Product {
     private String product_serial;
 
     @Column(name = "SKU_ID")
-    private String sku_id;
+    private Long sku_id;
 
     @Column(name = "PRODUCT_BRAND")
     private String product_brand;
