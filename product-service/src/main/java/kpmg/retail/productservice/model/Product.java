@@ -16,29 +16,29 @@ import java.util.Random;
 public class Product {
     @Id
     @Column(name = "PRODUCT_SERIAL")
-    private String product_serial;
+    private String productSerial;
 
     @Column(name = "SKU_ID")
-    private Long sku_id;
+    private Long skuId;
 
     @Column(name = "PRODUCT_BRAND")
-    private String product_brand;
+    private String productBrand;
 
     @Column(name = "PRODUCT_NAME")
-    private String product_name;
+    private String productName;
 
     @Column(name = "PRODUCT_IMAGE")
-    private String product_image;
+    private String productImage;
 
     @Column(name = "PRODUCT_CATEGORY")
-    private String product_category;
+    private String productCategory;
 
     @Column(name = "TAX_RATE")
-    private Double tax_rate;
+    private Double taxRate;
 
     @Column(name = "MRP")
     private Double mrp;
 
     @Column(name = "SELLING_PRICE")
-    private Double selling_price;
+    private Double sellingPrice;
 }
